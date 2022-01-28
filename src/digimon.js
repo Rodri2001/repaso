@@ -1,6 +1,42 @@
+const { Router } = require("express");
 const express = require("express");
 const route = express.Router();
 const { Digimon, Episode } = require("./db");
+
+
+
+
+
+
+route.get('/order/:orderDigimon', async (req,res) => {
+  const {orderDigimon} = req.params
+  try {
+    const digimonOrder = await Digimon.findAll({
+      order: [["name", orderDigimon]]
+    })
+    return res.json(digimonOrder)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+route.get('/filter/:filterDigimon', async (req,res) => {
+  const {filterDigimon} = req.params
+  try {
+    const digimonFilter = await Digimon.findAll({
+      where: {
+        color: filterDigimon
+      }
+    })
+    return res.json(digimonFilter)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+
 
 route.get("/getby", async (req, res, next) => {
   const { id } = req.query;
