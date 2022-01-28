@@ -46,18 +46,18 @@ let episodes = [
 server.use("/", app);
 
 conn.sync({ force: true }).then(() => {
-  // digimons.forEach(ele => {
-  //   Digimon.create({
-  //     name: ele.name,
-  //     color: ele.color
-  //   })
-  // })
-  // episodes.forEach(ele => {
-  //   Episode.create({
-  //     name: ele.name,
-  //     url: ele.url
-  //   })
-  // })
+  digimons.forEach(ele => {
+    Digimon.create({
+      name: ele.name,
+      color: ele.color
+    })
+  })
+  episodes.forEach(ele => {
+    Episode.create({
+      name: ele.name,
+      url: ele.url
+    })
+  })
   server.listen(3001, () => {
     console.log("Estoy en el puerto 3001");
   });

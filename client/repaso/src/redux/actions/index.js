@@ -13,3 +13,19 @@ export const getAllDigimons = ()=>{
     })
   }
 }
+
+export const filterDigimon = (payload) => {
+  return (dispatch)=> dispatch({
+    type: 'FILTER_DIGIMON',
+    payload,
+  })
+}
+
+
+//                            ASC o DESC
+// export const orderDigimon = (payload) => {
+//   return (dispatch)=>{
+//     axios.get(`http://localhost:3001/digimon/order/${payload}` )
+//   }
+
+// }

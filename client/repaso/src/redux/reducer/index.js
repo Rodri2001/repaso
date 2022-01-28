@@ -12,6 +12,14 @@ export default function rootReducer (state = initalState, action){
         ...state,
         digimons: action.payload
       }
+    
+    case 'FILTER_DIGIMON':
+    let filter = state.digimons.filter(ele => ele.color === action.payload)
+    return {
+      ...state, 
+      digimons: filter
+    }
+
     default: return state
   }
 
