@@ -6,7 +6,13 @@ const {Digimon, Episode} = require('./src/db')
 const server = express();
 
 server.use(express.json());
-
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 let digimons = [
   {
@@ -40,21 +46,25 @@ let episodes = [
 server.use("/", app);
 
 conn.sync({ force: true }).then(() => {
-  digimons.forEach(ele => {
-    Digimon.create({
-      name: ele.name,
-      color: ele.color
-    })
-  })
-  episodes.forEach(ele => {
-    Episode.create({
-      name: ele.name,
-      url: ele.url
-    })
-  })
+  // digimons.forEach(ele => {
+  //   Digimon.create({
+  //     name: ele.name,
+  //     color: ele.color
+  //   })
+  // })
+  // episodes.forEach(ele => {
+  //   Episode.create({
+  //     name: ele.name,
+  //     url: ele.url
+  //   })
+  // })
   server.listen(3001, () => {
     console.log("Estoy en el puerto 3001");
   });
-});
+})
+
+.catch((e)=>{
+  console.log(e)
+})
  
 
